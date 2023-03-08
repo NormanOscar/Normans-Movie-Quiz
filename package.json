@@ -1,0 +1,18 @@
+{
+  "name": "norman_movie_quiz",
+  "productName": "Normans Movie Quiz",
+  "version": "1.0.0",
+  "description": "Movie Quiz Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . 'Movie_Quiz' --win && cp img/movie_quiz_icon.png Movie_Quiz-darwin-x64/Movie_Quiz.app/Contents/Resources/electron.icns"
+  },
+  "author": "Oscar Norman",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^22.2.0",
+    "electron-builder": "^23.6.0",
+    "electron-packager": "^17.1.1"
+  }
+}

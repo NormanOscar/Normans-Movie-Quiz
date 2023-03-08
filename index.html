@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+    <script src="https://kit.fontawesome.com/5470457d79.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/Option.js"></script>
+    <script type="text/javascript" src="js/Question.js"></script>
+    <script type="text/javascript" src="js/DataFetcher.js"></script>
+    <script type="text/javascript" src="js/Quiz.js"></script>
+    <script type="text/javascript" src="js/ImgQuiz.js"></script>
+    <script type="text/javascript" src="js/QuotesQuiz.js"></script>
+    <script type="text/javascript" src="js/TaglinesQuiz.js"></script>
+    <script type="text/javascript" src="js/TopCastQuiz.js"></script>
+    <script type="text/javascript" src="js/Main.js"></script>
+    <title>Normans Movie Quiz</title>
+</head>
+<body>
+    <div id="background-video-wrapper">
+        <video autoplay muted loop id="background-video">
+            <source src="img/background.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+    <main>
+        <div id="window-content">
+            <div id="cursor"></div>
+            <h1 id="title">Movie Quiz</h1>
+            <ul id="typeBtns">
+                <li><button id="img-btn">Images</button></li>
+                <li><button id="qts-btn">Quotes</button></li>
+                <li><button id="tl-btn">Taglines</button></li>
+                <li><button id="tc-btn">Top cast</button></li>
+            </ul>
+            <div id="error-window">
+                <h3 id="error-msg1"></h3>
+                <br>
+                <h3 id="error-msg2"></h3>
+            </div>
+            <div id="quiz-window">
+                <div id="latest-games">
+                    <h1>Latest games:</h1>
+                    <ul></ul>
+                </div>
+                <div id="loader-wrapper">
+                    <img src="img/loader.gif" alt="Loader GIF" id="loader">
+                </div>
+                <div id="start-wrapper">
+                    <img src="" alt="Start image" id="start-img">
+                    <h2>Number of questions:</h2>
+                    <form id="radio-btns">
+                        <input name="radio-btn" id="five" type="radio" value="5">
+                        <label for="five">5</label>
+                        <input name="radio-btn" id="ten" type="radio" value="10" checked>
+                        <label for="ten">10</label>
+                        <input name="radio-btn" id="fifteen" type="radio" value="15">
+                        <label for="fifteen">15</label>
+                        <input name="radio-btn" id="twenty" type="radio" value="20">
+                        <label for="twenty">20</label>
+                    </form>
+                    <div id="start-btn-wrapper"></div>
+                </div>
+                <div id="quiz-wrapper">
+                    <div id="quiz-header">
+                        <h1 id="question-header"></h1>
+                        <div id="hint-overlay"></div>
+                        <div id="hint-popup">
+                            <div id="hint-header">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </div>
+                            <h2>Hover over each header to get a hint</h2>
+                            <hr>
+                            <div id="hint-wrapper"></div>
+                        </div>
+                    </div>
+                    <div id="question-wrapper"></div>
+                    <h1 id="clock">00:00</h1>
+                    <div id="option-wrapper"></div>
+                    <button id="hint-btn">Hints:</button>
+                </div>
+                <div id="score-wrapper">
+                    <h1 id="score-title">Score:</h1>
+                    <h2 id="score"></h2>
+                    <h2 id="time"></h2>
+                    <ul id="answer-info">
+                        <li><div id="correct-answer"></div></li>
+                        <li>Correct answer</li>
+                        <li><div id="incorrect-answer"></div></li>
+                        <li>Your incorrect answer</li>
+                    </ul>
+                    <div id="answers-wrapper"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
