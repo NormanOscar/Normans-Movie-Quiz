@@ -104,7 +104,7 @@ class DataFetcher {
     async getQuestions(path) {
         /* this.baseURL += path;
         return this.sendRequest(); */
-        const response = await fetch('./json/imdb8-taglines-response.json');
+        const response = await fetch('./json/imdb8-img-response.json');
         return await response.json();
     }
     

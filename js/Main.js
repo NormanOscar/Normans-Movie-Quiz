@@ -30,7 +30,7 @@ class Main {
     init () {
         document.body.onselectstart = function(){ return false };
         document.body.onmousedown = function(){ return false };
-    
+        document.querySelector("#countdown-wrapper").style.display = 'none';
         document.querySelector('#background-video').playbackRate = 0.7;
         this.setBtnsEnabled(false);
         this.getMovieIds();

@@ -17,7 +17,7 @@ class Quiz {
         this.clock = new Date();
         this.interval = null;
     }
-    
+
     /**
      * Shows start wrapper element in html and created startbutton for quiz
      * 
@@ -38,7 +38,7 @@ class Quiz {
 
         this.createStartBtn();
     }
-    
+
     /**
      * Create start button and adds event listener to start quiz
      * 
@@ -51,7 +51,7 @@ class Quiz {
         startBtn.textContent = 'Start';
 
         startBtn.addEventListener('click', e => {
-            this.startQuiz();
+            this.prepairQuiz();
         });
 
         document.querySelector('#start-btn-wrapper').appendChild(startBtn);
@@ -70,34 +70,69 @@ class Quiz {
         }
     }
 
-     /**
-     * Starts quiz by loading and showing question and quiz wrapper
-     * 
-     * @return {undefined}
-     */
-      async startQuiz() {
-        
+    /**
+    * Starts quiz by loading and showing question and quiz wrapper
+    * 
+    * @return {undefined}
+    */
+    async prepairQuiz() {
+        document.querySelector('#amountLoaded').textContent = '0/' + this.nrOfQuestions;
+
         for (const radioBtn of document.querySelectorAll('#radio-btns > input')) {
             if (radioBtn.checked) {
                 this.nrOfQuestions = radioBtn.value;
             }
         }
-        
-        await this.loadQuestions();
 
+        await this.loadQuestions();
+        document.querySelector('#progressBar').innerHTML = '';
+        document.querySelector('#start-wrapper').style.display = 'none';
+
+        document.querySelector("#countdown-wrapper").style.display = 'block';
+        this.startCountdown();
+    }
+    
+    startQuiz() {
         this.clock.setMinutes(0);
         this.clock.setSeconds(0);
-
+    
         this.showClock(this.clock);
         if (!this.interval == null) {
             clearInterval(this.interval);
         }
         this.interval = setInterval(() => { this.updateClock(this) }, 1000);
-
-        document.querySelector('#start-wrapper').style.display = 'none';
+    
         document.querySelector('#quiz-wrapper').style.display = 'block';
-
+    
         this.showQuestion(0);
+    }
+
+    startCountdown() {
+        let count = 3;
+        const self = this;
+        const countdown = setInterval(function () {
+            if (count <= 0) {
+                clearInterval(countdown);
+                document.querySelector("#countdown").textContent = '';
+                document.querySelector("#countdown-wrapper").style.display = 'none';
+                self.startQuiz();
+
+            } else {
+                document.querySelector("#countdown").textContent = count;
+            }
+            count--;
+        }, 1000);
+    }
+
+    updateProgress(progressNr) {
+        const progressBar = document.querySelector('#progressBar');
+        progressBar.style.width = 40 + 'em';
+        const progress = document.createElement('div');
+        progress.setAttribute('class', 'progress');
+        progress.style.width = (40 / Number(this.nrOfQuestions)) + 'em';
+
+        progressBar.appendChild(progress);
+        document.querySelector('#amountLoaded').textContent = (progressNr + 1) + '/' + this.nrOfQuestions;
     }
 
     /**
@@ -167,7 +202,7 @@ class Quiz {
      * 
      * @return {undefined}
      */
-     createOptions(nr, question) {
+    createOptions(nr, question) {
         const optionWrapper = document.querySelector('#option-wrapper');
         optionWrapper.innerHTML = '';
         for (const option of question.options) {
@@ -186,6 +221,8 @@ class Quiz {
      * Adds to score if answer is correct
      * 
      * @param {e} Event from eventlistener 
+     * 
+     * @return {undefined}
      */
     addToScore(e, nr) {
         for (const option of this.questions[nr].options) {
@@ -221,7 +258,7 @@ class Quiz {
             hintWrapper.appendChild(singularHint);
         }
     }
-    
+
     /**
      * Creates one hint
      * 
@@ -237,15 +274,15 @@ class Quiz {
         hintKey.setAttribute('class', 'hint-key');
         hintKey.textContent = key;
         singularHintWrapper.appendChild(hintKey);
-        
+
         const hintValue = document.createElement('p');
         hintValue.setAttribute('class', 'hint-value');
         hintValue.textContent = value;
         singularHintWrapper.appendChild(hintValue);
-        
+
         hintKey.addEventListener('mouseenter', e => { hintValue.style.visibility = 'visible'; });
         hintKey.addEventListener('mouseleave', e => { hintValue.style.visibility = 'hidden'; });
-        
+
         return singularHintWrapper;
     }
 
@@ -284,7 +321,7 @@ class Quiz {
         document.querySelector('#time').innerHTML = timeStr;
 
         const dateFormat = new Date().toDateString();
-        const result = { time: timeStr, score: this.score, nrOfQuestions: this.nrOfQuestions, date: dateFormat, typeOfQuiz: this.typeOfQuiz};
+        const result = { time: timeStr, score: this.score, nrOfQuestions: this.nrOfQuestions, date: dateFormat, typeOfQuiz: this.typeOfQuiz };
         this.saveScores(result);
         this.showAnswers();
     }
@@ -355,9 +392,9 @@ class Quiz {
     saveScores(result) {
         const savedScores = JSON.parse(localStorage.getItem('latestScores')) || []; // get the score, or the initial value if empty
         savedScores.push(result); // add the result
-        
+
         if (savedScores.length > 5) {
-            savedScores.splice(0,1);
+            savedScores.splice(0, 1);
         }
 
         localStorage.setItem('latestScores', JSON.stringify(savedScores));

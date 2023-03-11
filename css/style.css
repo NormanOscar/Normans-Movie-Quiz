@@ -413,3 +413,30 @@ span {
     color: white;
     text-align: center;
 }
+#progressBar {
+    background-color: rgba(202, 202, 202, 0.4);
+    width: 40em;
+    height: 1.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0.5em;
+}
+.progress{
+    background-color: rgb(255, 194, 27);
+    height: 1em;
+}
+#amountLoaded {
+    text-align: center;
+    color: white;
+    font-size: xx-large;
+}
+#countdown-wrapper {
+    width: fit-content;
+    margin: 0 auto;
+}
+#countdown {
+    font-size: 8em;
+    color: white;
+    text-align: center;
+}

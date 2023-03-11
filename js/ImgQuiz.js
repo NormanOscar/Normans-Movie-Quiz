@@ -27,6 +27,7 @@ class ImgQuiz extends Quiz {
      */
     async loadQuestions() {
         while (this.questions.length < this.nrOfQuestions) {
+            this.updateProgress(this.questions.length);
             const r = Math.floor(Math.random() * this.movies.length);
             let questionImgUrl = '';
 

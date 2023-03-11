@@ -27,6 +27,7 @@ class TaglinesQuiz extends Quiz {
      */
     async loadQuestions() {
         while (this.questions.length < this.nrOfQuestions) {
+            this.updateProgress(this.questions.length);
             const r = Math.floor(Math.random() * this.movies.length);
 
             const path = 'title/get-taglines?tconst=' + this.movies[r].imdbid;
