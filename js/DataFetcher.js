@@ -86,10 +86,8 @@ class DataFetcher {
     async getImdbTop100() {
         this.errorMsg = 'Could not load list of top 100 movies from IMDB.  Reload the application and try again.';
         this.host = 'imdb-top-100-movies.p.rapidapi.com';
-        /* this.baseURL = 'https://imdb-top-100-movies.p.rapidapi.com/';
-        return this.sendRequest(); */
-        const response = await fetch('./json/imdb-top-100-movies-response.json');
-        return await response.json();
+        this.baseURL = 'https://imdb-top-100-movies.p.rapidapi.com/';
+        return this.sendRequest();
     }
 
     /**
@@ -100,10 +98,8 @@ class DataFetcher {
      * @returns {response} Response object
      */
     async getQuestions(path) {
-        /* this.baseURL += path;
-        return this.sendRequest(); */
-        const response = await fetch('./json/imdb8-img-response.json');
-        return await response.json();
+        this.baseURL += path;
+        return this.sendRequest();
     }
     
     /**
@@ -115,10 +111,8 @@ class DataFetcher {
      */
     async getMovie(movieId) {
         this.errorMsg = 'Could not fetch data for correct answers for questions.  Reload the application and try again.';
-        /* this.host = 'movie-database-alternative.p.rapidapi.com';
+        this.host = 'movie-database-alternative.p.rapidapi.com';
         this.baseURL = 'https://movie-database-alternative.p.rapidapi.com/?r=json&i=' + movieId;
-        return this.sendRequest(); */
-        const response = await fetch('./json/movie-database-alternative-response.json');
-        return await response.json();
+        return this.sendRequest();
     }
 }
