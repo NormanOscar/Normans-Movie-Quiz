@@ -17,6 +17,7 @@ class Quiz {
         this.clock = new Date();
         this.interval = null;
     }
+    
 
     /**
      * Shows start wrapper element in html and created startbutton for quiz
@@ -24,7 +25,7 @@ class Quiz {
      * @return {undefined}
      */
     showStart() {
-        document.querySelector('#window-content').style.paddingTop = 10 + 'px';
+        document.querySelector('#window-content').style.paddingTop = 50 + 'px';
         for (const button of document.querySelectorAll('#radio-btns input')) {
             button.checked = false;
         }
@@ -92,7 +93,14 @@ class Quiz {
         this.startCountdown();
     }
     
+    /**
+     * Starts quiz by starting clock and showing questions
+     * 
+     * @return {undefined}
+     */
     startQuiz() {
+        document.querySelector('#window-content').style.paddingTop = 5 + 'px';
+
         this.clock.setMinutes(0);
         this.clock.setSeconds(0);
     
@@ -107,6 +115,11 @@ class Quiz {
         this.showQuestion(0);
     }
 
+    /**
+     * Starts countdown before the quiz
+     * 
+     * @return {undefined}
+     */
     startCountdown() {
         let count = 3;
         const self = this;
@@ -124,6 +137,13 @@ class Quiz {
         }, 1000);
     }
 
+    /**
+     * Updates progressbar depending on number of loaded questions
+     * 
+     * @param {progressNr} Number of questions loaded 
+     * 
+     * @return {undefined}
+     */
     updateProgress(progressNr) {
         const progressBar = document.querySelector('#progressBar');
         progressBar.style.width = 40 + 'em';
@@ -132,13 +152,13 @@ class Quiz {
         progress.style.width = (40 / Number(this.nrOfQuestions)) + 'em';
 
         progressBar.appendChild(progress);
-        document.querySelector('#amountLoaded').textContent = (progressNr + 1) + '/' + this.nrOfQuestions;
+        document.querySelector('#amountLoaded').textContent = (progressNr + 1) + '/' + this.nrOfQuestions + ' Questions have been loaded';
     }
 
     /**
      * Updates clock every second
      * 
-     * @param {self} Referens to current instance of quiz object
+     * @param {self} Reference to current instance of quiz object
      * 
      * @return {undefined}
      */
@@ -249,9 +269,9 @@ class Quiz {
         const hintWrapper = document.querySelector('#hint-wrapper');
         hintWrapper.innerHTML = "";
 
-        document.querySelector('#hint-overlay').addEventListener('click', this.changePopdownVisibility);
-        document.querySelector('#hint-btn').addEventListener('click', this.changePopdownVisibility);
-        document.querySelector('.fa-solid').addEventListener('click', this.changePopdownVisibility);
+        document.querySelector('#hint-overlay').addEventListener('click', this.changePopupVisibility);
+        document.querySelector('#hint-btn').addEventListener('click', this.changePopupVisibility);
+        document.querySelector('.fa-solid').addEventListener('click', this.changePopupVisibility);
 
         for (const [key, value] of Object.entries(question.movieInfo)) {
             const singularHint = this.createSingularHint(key, value);
@@ -291,7 +311,7 @@ class Quiz {
      * 
      * @return {undefined}
      */
-    changePopdownVisibility() {
+    changePopupVisibility() {
         const hintPopup = document.querySelector('#hint-popup');
         const hintOverlay = document.querySelector('#hint-overlay');
 
@@ -357,14 +377,14 @@ class Quiz {
     /**
      * Creates all options for one questions
      * 
-     * @param {i} Index for question in list of questions
+     * @param {index} Index for question in list of questions
      * 
      * @return {Element} Div with all answer options
      */
-    createAnswerOptions(i) {
+    createAnswerOptions(index) {
         const answerOptionsWrapper = document.createElement('div');
         answerOptionsWrapper.setAttribute('id', 'answer-options-wrapper');
-        for (const option of this.questions[i].options) {
+        for (const option of this.questions[index].options) {
             const optionElem = document.createElement('p');
             optionElem.setAttribute('class', 'optionElem');
             optionElem.textContent = option.title;

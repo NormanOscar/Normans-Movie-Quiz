@@ -51,8 +51,7 @@ class DataFetcher {
      * @return {undefined}
      */
     showLoader() {
-        const loaderDiv = document.querySelector('#loader-wrapper');
-        loaderDiv.style.display = 'block';
+        document.querySelector('#loader-wrapper').style.display = 'block';
         document.querySelector('#start-wrapper').style.display = 'none';
     }
     
@@ -62,8 +61,7 @@ class DataFetcher {
      * @return {undefined}
      */
     hideLoader() {
-        const loaderDiv = document.querySelector('#loader-wrapper');
-        loaderDiv.style.display = 'none';
+        document.querySelector('#loader-wrapper').style.display = 'none';
     }
     
     /**

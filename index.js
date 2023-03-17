@@ -1,16 +1,24 @@
-const {BrowserWindow, app, Menu} = require('electron');
+const {BrowserWindow, app} = require('electron');
 
+/**
+ * Creates application window
+ * 
+ * @return {undefined}
+ */
 const createWindow = () => {
     const win = new BrowserWindow({
         width:1200,
         height:1200,
-        icon: '/img/movie_quiz_icon.png',
         resizable:false
     });
     win.loadFile("index.html");
 }
 
-
+/**
+ * Calls function when app has loaded
+ * 
+ * @return {undefined}
+ */
 app.whenReady().then(() => {
     createWindow();
 });

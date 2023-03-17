@@ -6,11 +6,10 @@
  */
 class Option {
     /**
-     * Constructor method with properties for one option
      * 
-     * @param {imdbTop100} List of top 100 movies 
-     * 
-     * @return {undefined}
+     * @param {title} String with movie title 
+     * @param {correct} Boolean for correct answer or not 
+     * @param {chosen} Boolean if option is chosen or not
      */
     constructor(title, correct, chosen) {
         this.title = title;
