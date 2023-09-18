@@ -12,7 +12,7 @@ class DataFetcher {
      * @return {undefined}
      */
     constructor() {
-        this.API_key = "bd13cf4c85msh92b6283ddea86aap1f5128jsn1ebd56a38ac8";
+        this.API_key = "your_API_key";
         this.baseURL = "https://imdb8.p.rapidapi.com/";
         this.host = 'imdb8.p.rapidapi.com';
         this.errorMsg = 'Could not fetch question data from API.  Reload the application and try again.';
